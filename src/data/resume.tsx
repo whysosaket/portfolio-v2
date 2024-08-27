@@ -413,7 +413,7 @@ export const DATA = {
       ],
     },
     {
-      title: "Trithon, 2023 - TAT, ITER",
+      title: "Trithon, 2023 - TAT, Bhubaneswar",
       dates: "May 27, 2023",
       location: "5th Runner Up",
       description:

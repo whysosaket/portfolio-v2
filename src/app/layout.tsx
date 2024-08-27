@@ -55,6 +55,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/me.jpeg" />
+        <meta name="description" content="As a web developer with a strong foundation in machine learning and app development, I take pride in crafting visually stunning and highly functional websites. My expertise in various programming languages and frameworks enables me to bring ideas to reality. I am a self-motivated professional who likes to solve problems and learn new skills." />
+        <meta name="keywords" content="saket, aryan, saket aryan, web developer, machine learning, app development, programming, frameworks, problem solving, self-taught, professional" />
+        <meta name="author" content="Saket Aryan" />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
