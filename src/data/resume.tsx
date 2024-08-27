@@ -417,7 +417,7 @@ export const DATA = {
       dates: "May 27, 2023",
       location: "5th Runner Up",
       description:
-        "Developed SixthSense, a stock market prediction simulator. It provides an engaging environment for users to experiment with various market scenarios and predictions.",
+        "Developed GreenMe, that tackles this by tracking user activities, integrating with various apps for immediate sustainable suggestions, and fostering a community.",
       image:
         "https://media.licdn.com/dms/image/v2/C560BAQGW8IE6OgRRkA/company-logo_200_200/company-logo_200_200/0/1630646708778/trident_academy_of_technology_tat_bhubaneswar_logo?e=2147483647&v=beta&t=7Yi8jP_oQbrOL2ChiLh0t5uda2P1y0GkV0xINleUAY4",
       links: [
