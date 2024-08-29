@@ -28,6 +28,8 @@ interface Props {
   className?: string;
 }
 
+export type { Props as ProjectInterface };
+
 export function ProjectCard({
   title,
   href,

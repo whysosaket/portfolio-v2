@@ -1,17 +1,46 @@
+"use client";
 import { HackathonCard } from "@/components/hackathon-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { ProjectCard } from "@/components/project-card";
+import { ProjectCard, ProjectInterface } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
+import { motion } from "framer-motion";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
+  const [projectCount, setProjectCount] = useState(2);
+  const [projects, setProjects] = useState(DATA.projects);
+  const [reachedMax, setReachedMax] = useState(false);
+
+  useEffect(() => {
+    // @ts-ignore
+    setProjects(DATA.projects.slice(0, projectCount));
+  }, [projectCount]);
+
+  useEffect(() => {
+    setProjectCount(Math.min(DATA.projects.length, 2));
+    if (DATA.projects.length <= 2) setReachedMax(true);
+  }, []);
+
+  const showMore = () => {
+    let increment = Math.min(DATA.projects.length - projectCount, 2);
+    if (increment === 0) setReachedMax(true);
+    setProjectCount(projectCount + increment);
+    if (projectCount + increment >= DATA.projects.length) setReachedMax(true);
+  };
+
+  const showLess = () => {
+    setReachedMax(false);
+    setProjectCount(2);
+  };
+
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">
       <section id="hero">
@@ -131,7 +160,7 @@ export default function Page() {
             </div>
           </BlurFade>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
-            {DATA.projects.map((project, id) => (
+            {projects.map((project, id) => (
               <BlurFade
                 key={project.title}
                 delay={BLUR_FADE_DELAY * 12 + id * 0.05}
@@ -150,6 +179,33 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
+          <>
+            <div className="z-10 flex items-center justify-center w-full ">
+              {!reachedMax && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  onClick={showMore}
+                  className="shadow-2xl bg-white text-black px-2 py-1 text-sm mx-2 rounded-md hover:bg-gray-200"
+                >
+                  Show More
+                </motion.button>
+              )}
+
+              {!(projectCount <= 2) && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  onClick={showLess}
+                  className="shadow-2xl bg-[#333] text-white px-2 py-1 text-sm mx-2 rounded-md hover:bg-[#555]"
+                >
+                  Show Less
+                </motion.button>
+              )}
+            </div>
+          </>
         </div>
       </section>
       <section id="hackathons">
@@ -164,10 +220,9 @@ export default function Page() {
                   I like building things
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  During my time in university, I won{" "}
-                  {DATA.hackathons.length}+ hackathons. People from around the
-                  country would come together and build incredible things in 2-3
-                  days.
+                  During my time in university, I won {DATA.hackathons.length}+
+                  hackathons. People from around the country would come together
+                  and build incredible things in 2-3 days.
                 </p>
               </div>
             </div>
