@@ -220,7 +220,7 @@ export default function Page() {
                   I like building things
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  During my time in university, I won {DATA.hackathons.length}+
+                  During my time in university, I participated in {DATA.hackathons.length}+
                   hackathons. People from around the country would come together
                   and build incredible things in 2-3 days.
                 </p>
