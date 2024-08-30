@@ -284,7 +284,7 @@ export const DATA = {
             }
         ],
         "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+        "video":"/videos/vattend.mp4"
     },
     {
         "title": "Saarthi",
@@ -316,7 +316,7 @@ export const DATA = {
             }
         ],
         "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+        "video":"/videos/saarthi.mp4"
     },
     {
         "title": "Carmine Bank",
