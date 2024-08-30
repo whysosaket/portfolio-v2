@@ -136,510 +136,515 @@ export const DATA = {
   ],
   projects: [
     {
-        "title": "SixthSense",
-        "href": "https://sixthsense.vercel.app/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A web-based application that uses machine learning algorithms to predict stock market trends. It provides users with real-time data and forecasts, helping them make informed investment decisions.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Javascript",
-            "Tailwind",
-            "Framer Motion",
-            "React ChartJs2"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://sixthsense.vercel.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/SixthSense",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"/videos/sixthsense.mp4"
+      title: "SixthSense",
+      href: "https://sixthsense.vercel.app/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A web-based application that uses machine learning algorithms to predict stock market trends. It provides users with real-time data and forecasts, helping them make informed investment decisions.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Javascript",
+        "Tailwind",
+        "Framer Motion",
+        "React ChartJs2",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://sixthsense.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/SixthSense",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/videos/sixthsense.mp4",
     },
     {
-        "title": "Hackodex Website",
-        "href": "https://hackodex.codex-iter.in/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A website for hosting the Hackodex month-long open-source event. Features GitHub authentication for student registration and progress tracking, allowing participants to track their contributions and achievements throughout the event.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB,Tailwind",
-            "Framer Motion"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://hackodex.codex-iter.in/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/Hackodex2024",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"/videos/hackodex.mp4"
+      title: "Hackodex Website",
+      href: "https://hackodex.codex-iter.in/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A website for hosting the Hackodex month-long open-source event. Features GitHub authentication for student registration and progress tracking, allowing participants to track their contributions and achievements throughout the event.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB,Tailwind",
+        "Framer Motion",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://hackodex.codex-iter.in/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/Hackodex2024",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/videos/hackodex.mp4",
     },
     {
-        "title": "Samriddhi",
-        "href": "https://samriddhiapp.vercel.app/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A comprehensive financial app offering digital payments, fund management, insurance, and robust security, winner of Technex 24 IIT BHU Hackathon, built with MERN stack.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Typescript",
-            "Tailwind",
-            "Framer Motion",
-            "Aceternity UI",
-            "Atropos"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://samriddhiapp.vercel.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/Samriddhi/",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"/videos/samriddhi.mp4"
+      title: "Samriddhi",
+      href: "https://samriddhiapp.vercel.app/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A comprehensive financial app offering digital payments, fund management, insurance, and robust security, winner of Technex 24 IIT BHU Hackathon, built with MERN stack.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Typescript",
+        "Tailwind",
+        "Framer Motion",
+        "Aceternity UI",
+        "Atropos",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://samriddhiapp.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/Samriddhi/",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/videos/samriddhi.mp4",
     },
     {
-        "title": "LinkMyLinks",
-        "href": "https://linkmylinks.vercel.app/",
-        "dates": "2nd Year",
-        "active": true,
-        "description": "A personalized link management tool that goes beyond basic sharing. Organize links into categories, mark them as private, and create private groups for added security. Easily retrieve important links with just your login credentials.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Typescript",
-            "Tailwind",
-            "Framer Motion"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://linkmylinks.vercel.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/LinkMyLinks",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"/videos/linkmylinks.mp4"
+      title: "Saarthi",
+      href: "https://github.com/whysosaket/Saarthi",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A comprehensive educational platform with features like OCR, grade checking, feedback, real-time tracking, plagiarism detection, and classroom management, designed to enhance teaching and learning experiences.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Typescript",
+        "Tailwind",
+        "Framer Motion",
+        "React Plx",
+        "Atropos",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://github.com/whysosaket/Saarthi",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/Saarthi",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/videos/saarthi.mp4",
     },
     {
-        "title": "VAttend",
-        "href": "https://vattend.vercel.app/",
-        "dates": "2nd Year - 3rd Year",
-        "active": true,
-        "description": "A location-based attendance system built with Svelte. Users can mark attendance at specific locations using geolocation, with features like user authentication, location management, and attendance history.",
-        "technologies": [
-            "Svelte",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Javascript",
-            "Typescript",
-            "Tailwind"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://vattend.vercel.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/VAttend-TS",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"/videos/vattend.mp4"
+      title: "LinkMyLinks",
+      href: "https://linkmylinks.vercel.app/",
+      dates: "2nd Year",
+      active: true,
+      description:
+        "A personalized link management tool that goes beyond basic sharing. Organize links into categories, mark them as private, and create private groups for added security. Easily retrieve important links with just your login credentials.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Typescript",
+        "Tailwind",
+        "Framer Motion",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://linkmylinks.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/LinkMyLinks",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/videos/linkmylinks.mp4",
     },
     {
-        "title": "Saarthi",
-        "href": "https://github.com/whysosaket/Saarthi",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A comprehensive educational platform with features like OCR, grade checking, feedback, real-time tracking, plagiarism detection, and classroom management, designed to enhance teaching and learning experiences.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Typescript",
-            "Tailwind",
-            "Framer Motion",
-            "React Plx",
-            "Atropos"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://github.com/whysosaket/Saarthi",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/Saarthi",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"/videos/saarthi.mp4"
+      title: "VAttend",
+      href: "https://vattend.vercel.app/",
+      dates: "2nd Year - 3rd Year",
+      active: true,
+      description:
+        "A location-based attendance system built with Svelte. Users can mark attendance at specific locations using geolocation, with features like user authentication, location management, and attendance history.",
+      technologies: [
+        "Svelte",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Javascript",
+        "Typescript",
+        "Tailwind",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://vattend.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/VAttend-TS",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/videos/vattend.mp4",
     },
     {
-        "title": "Carmine Bank",
-        "href": "https://carminebank.vercel.app/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A Java Spring Boot and React.js-based banking website showcasing multithreading concepts. Features both semaphore-controlled and uncontrolled multithreading modes to demonstrate the importance of thread synchronization.",
-        "technologies": [
-            "React",
-            "MongoDB",
-            "Typescript",
-            "TailwindCSS",
-            "Spring Boot"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://carminebank.vercel.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/Banking-Spring-Boot",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "Carmine Bank",
+      href: "https://carminebank.vercel.app/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A Java Spring Boot and React.js-based banking website showcasing multithreading concepts. Features both semaphore-controlled and uncontrolled multithreading modes to demonstrate the importance of thread synchronization.",
+      technologies: [
+        "React",
+        "MongoDB",
+        "Typescript",
+        "TailwindCSS",
+        "Spring Boot",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://carminebank.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/Banking-Spring-Boot",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "LinguaConnect",
-        "href": "https://github.com/whysosaket/LinguaConnect",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A language learning platform connecting learners with teachers. Features include user registration, customizable classes, search functionality, scheduling, video calls, flashcards, and AI-powered features.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Typescript",
-            "Tailwind",
-            "Framer Motion",
-            "Aceternity UI",
-            "Atropos"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://github.com/whysosaket/LinguaConnect",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/LinguaConnect",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "LinguaConnect",
+      href: "https://github.com/whysosaket/LinguaConnect",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A language learning platform connecting learners with teachers. Features include user registration, customizable classes, search functionality, scheduling, video calls, flashcards, and AI-powered features.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Typescript",
+        "Tailwind",
+        "Framer Motion",
+        "Aceternity UI",
+        "Atropos",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://github.com/whysosaket/LinguaConnect",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/LinguaConnect",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "Doctor-Dashboard",
-        "href": "https://doctor-dashboard-three.vercel.app/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A responsive frontend dashboard designed for doctors. Features customizable components and a user-friendly interface to efficiently manage patient data, appointments, and other medical tasks.",
-        "technologies": [
-            "NextJs",
-            "Tailwind CSS",
-            "Framer Motion",
-            "React ChartJs 2"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://doctor-dashboard-three.vercel.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/Doctor-Dashboard",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "Doctor-Dashboard",
+      href: "https://doctor-dashboard-three.vercel.app/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A responsive frontend dashboard designed for doctors. Features customizable components and a user-friendly interface to efficiently manage patient data, appointments, and other medical tasks.",
+      technologies: [
+        "NextJs",
+        "Tailwind CSS",
+        "Framer Motion",
+        "React ChartJs 2",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://doctor-dashboard-three.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/Doctor-Dashboard",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "Codeberg",
-        "href": "https://codeberg.vercel.app/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A deployable container solution for hosting coding competitions. Features user registration, login, admin functionality, question submission, and code writing/running capabilities.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Typescript",
-            "Tailwind"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://codeberg.vercel.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/codeberg",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "Codeberg",
+      href: "https://codeberg.vercel.app/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A deployable container solution for hosting coding competitions. Features user registration, login, admin functionality, question submission, and code writing/running capabilities.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Typescript",
+        "Tailwind",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://codeberg.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/codeberg",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "PayBackPal",
-        "href": "MOBILE APP",
-        "dates": "2nd Year",
-        "active": true,
-        "description": "A React Native-based mobile app for managing shared expenses. Easily add expenses, track debts, and view expense summaries. A user-friendly solution for hassle-free expense management.",
-        "technologies": [
-            "React Native",
-            "Javascript"
-        ],
-        "links": [
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/PayBackPal",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "PayBackPal",
+      href: "MOBILE APP",
+      dates: "2nd Year",
+      active: true,
+      description:
+        "A React Native-based mobile app for managing shared expenses. Easily add expenses, track debts, and view expense summaries. A user-friendly solution for hassle-free expense management.",
+      technologies: ["React Native", "Javascript"],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/PayBackPal",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "Portfolio",
-        "href": "https://saketaryan.netlify.app/",
-        "dates": "2nd Year",
-        "active": true,
-        "description": "A personal website showcasing my skills and projects, built with React.js, TypeScript, and SCSS for a modern and interactive design.",
-        "technologies": [
-            "React",
-            "Typescript",
-            "SCSS"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://saketaryan.netlify.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/Portfolio",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "Portfolio",
+      href: "https://saketaryan.netlify.app/",
+      dates: "2nd Year",
+      active: true,
+      description:
+        "A personal website showcasing my skills and projects, built with React.js, TypeScript, and SCSS for a modern and interactive design.",
+      technologies: ["React", "Typescript", "SCSS"],
+      links: [
+        {
+          type: "Website",
+          href: "https://saketaryan.netlify.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/Portfolio",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "Graviti",
-        "href": "https://graviti-navigator.netlify.app/",
-        "dates": "2nd Year",
-        "active": true,
-        "description": "A React application using Google Maps API and Tailwind CSS to visualize the shortest path between two locations.",
-        "technologies": [
-            "React",
-            "Google Maps API",
-            "Javascript",
-            "Tailwind"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://graviti-navigator.netlify.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/Graviti-Assignment",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "Graviti",
+      href: "https://graviti-navigator.netlify.app/",
+      dates: "2nd Year",
+      active: true,
+      description:
+        "A React application using Google Maps API and Tailwind CSS to visualize the shortest path between two locations.",
+      technologies: ["React", "Google Maps API", "Javascript", "Tailwind"],
+      links: [
+        {
+          type: "Website",
+          href: "https://graviti-navigator.netlify.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/Graviti-Assignment",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "FindMyMovies",
-        "href": "https://findmymovie.onrender.com/",
-        "dates": "1st Year",
-        "active": true,
-        "description": "A web application using EJS, Node, and Express to fetch movie and web series data from MoviesDB API. Displays details, categories, search functionality, season information, and similar recommendations.",
-        "technologies": [
-            "EJS",
-            "Movies API",
-            "NodeJs",
-            "Bootstrap"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://findmymovie.onrender.com/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/FindMyMovie",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "FindMyMovies",
+      href: "https://findmymovie.onrender.com/",
+      dates: "1st Year",
+      active: true,
+      description:
+        "A web application using EJS, Node, and Express to fetch movie and web series data from MoviesDB API. Displays details, categories, search functionality, season information, and similar recommendations.",
+      technologies: ["EJS", "Movies API", "NodeJs", "Bootstrap"],
+      links: [
+        {
+          type: "Website",
+          href: "https://findmymovie.onrender.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/FindMyMovie",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "Musicart",
-        "href": "https://musicartnew.netlify.app/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "An online music store selling headphones and other music items, developed during an internship at Cuvette. Features a user-friendly interface for browsing, purchasing, and managing orders.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Javascript",
-            "Vanilla CSS"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://musicartnew.netlify.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/MusicCart",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "Musicart",
+      href: "https://musicartnew.netlify.app/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "An online music store selling headphones and other music items, developed during an internship at Cuvette. Features a user-friendly interface for browsing, purchasing, and managing orders.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Javascript",
+        "Vanilla CSS",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://musicartnew.netlify.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/MusicCart",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "Quizzie",
-        "href": "https://quizzie-client.vercel.app/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "An online quiz and polling platform with a timer. Features various quiz types, real-time scoring, and customizable options. Developed during an internship at Cuvette.",
-        "technologies": [
-            "React",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Javascript",
-            "Vanilla CSS"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://quizzie-client.vercel.app/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/Quizzie",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "Quizzie",
+      href: "https://quizzie-client.vercel.app/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "An online quiz and polling platform with a timer. Features various quiz types, real-time scoring, and customizable options. Developed during an internship at Cuvette.",
+      technologies: [
+        "React",
+        "NodeJs",
+        "Express",
+        "MongoDB",
+        "Javascript",
+        "Vanilla CSS",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://quizzie-client.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/Quizzie",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "GreenMe",
-        "href": "https://github.com/whysosaket/GreenMe",
-        "dates": "3rd Year (Hackathon)",
-        "active": true,
-        "description": "A mobile app promoting sustainable living. Tracks user activities, offers real-time suggestions, gamifies eco-friendly behaviors, and fosters a community for environmental awareness.",
-        "technologies": [
-            "Flutter",
-            "NodeJs",
-            "Express",
-            "MongoDB",
-            "Typescript"
-        ],
-        "links": [
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/GreenMe",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+      title: "GreenMe",
+      href: "https://github.com/whysosaket/GreenMe",
+      dates: "3rd Year (Hackathon)",
+      active: true,
+      description:
+        "A mobile app promoting sustainable living. Tracks user activities, offers real-time suggestions, gamifies eco-friendly behaviors, and fosters a community for environmental awareness.",
+      technologies: ["Flutter", "NodeJs", "Express", "MongoDB", "Typescript"],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/GreenMe",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
-        "title": "Codex Backend",
-        "href": "https://codex-iter.in/",
-        "dates": "3rd Year",
-        "active": true,
-        "description": "A Spring Boot application serving as the backend for the Codex Iter website. Provides endpoints for managing event data and member information, designed for seamless integration with the Codex ITER frontend.",
-        "technologies": [
-            "Spring Boot"
-        ],
-        "links": [
-            {
-                "type": "Website",
-                "href": "https://codex-iter.in/",
-                "icon": <Icons.globe className='size-3' />
-            },
-            {
-                "type": "Source",
-                "href": "https://github.com/whysosaket/codex-backend-spring",
-                "icon": <Icons.github className='size-3' />
-            }
-        ],
-        "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
-    }
-],
+      title: "Codex Backend",
+      href: "https://codex-iter.in/",
+      dates: "3rd Year",
+      active: true,
+      description:
+        "A Spring Boot application serving as the backend for the Codex Iter website. Provides endpoints for managing event data and member information, designed for seamless integration with the Codex ITER frontend.",
+      technologies: ["Spring Boot"],
+      links: [
+        {
+          type: "Website",
+          href: "https://codex-iter.in/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/whysosaket/codex-backend-spring",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video:
+        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+    },
+  ],
   hackathons: [
     {
       title: "HackItOut, 2024 - IIT (BHU)",
