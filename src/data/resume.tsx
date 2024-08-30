@@ -164,7 +164,7 @@ export const DATA = {
             }
         ],
         "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+        "video":"/videos/sixthsense.mp4"
     },
     {
         "title": "Hackodex Website",
@@ -192,7 +192,7 @@ export const DATA = {
             }
         ],
         "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+        "video":"/videos/hackodex.mp4"
     },
     {
         "title": "Samriddhi",
@@ -224,7 +224,7 @@ export const DATA = {
             }
         ],
         "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+        "video":"/videos/samriddhi.mp4"
     },
     {
         "title": "LinkMyLinks",
@@ -254,7 +254,7 @@ export const DATA = {
             }
         ],
         "image": "",
-        "video":"https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4"
+        "video":"/videos/linkmylinks.mp4"
     },
     {
         "title": "VAttend",
