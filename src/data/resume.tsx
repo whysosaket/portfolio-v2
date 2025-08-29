@@ -30,7 +30,10 @@ export const DATA = {
     "TailwindCSS",
     "Framer Motion",
   ],
-  navbar: [{ href: "/", icon: HomeIcon, label: "Home" }],
+  navbar: [
+    { href: "/", icon: HomeIcon, label: "Home" },
+    { href: "/blog", icon: NotebookIcon, label: "Blog" },
+  ],
   contact: {
     email: "saketaryan2002@gmail.com",
     tel: "+919950262900",

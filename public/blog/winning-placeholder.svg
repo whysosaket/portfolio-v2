@@ -1,0 +1,10 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0f172a"/>
+  <rect x="40" y="40" width="1120" height="550" rx="24" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" fill="#e5e7eb">
+    <text x="80" y="170" font-size="72" font-weight="700">On Winning</text>
+    <text x="80" y="230" font-size="24" fill="#94a3b8">A simple placeholder image</text>
+    <text x="80" y="520" font-size="18" fill="#94a3b8">/blog/winning-placeholder.svg</text>
+  </g>
+</svg>
+
