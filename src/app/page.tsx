@@ -94,10 +94,35 @@ export default function Page() {
                 logoUrl={work.logoUrl}
                 altText={work.company}
                 title={work.company}
-                subtitle={work.title}
+                // Show current position when multiple roles exist
+                // @ts-ignore allow mixed shapes for work items
+                subtitle={
+                  // @ts-ignore
+                  work.positions && work.positions.length > 0
+                    ? // @ts-ignore
+                      `${work.positions[0].title}${work.positions[0].employmentType ? ` · ${work.positions[0].employmentType}` : ""}`
+                    : // @ts-ignore
+                      work.title
+                }
                 href={work.href}
                 badges={work.badges}
-                period={`${work.start} - ${work.end ?? "Present"}`}
+                // compute period: if positions exist, use first start to last end
+                // @ts-ignore allow optional positions
+                period={
+                  // @ts-ignore
+                  work.positions && work.positions.length > 0
+                    ? // @ts-ignore
+                      `${work.positions[work.positions.length - 1].start} - ${
+                        // @ts-ignore
+                        work.positions[0].end
+                      }`
+                    : `${work.start} - ${work.end ?? "Present"}`
+                }
+                // @ts-ignore bullets for single-role entries
+                bullets={work.bullets}
+                // @ts-ignore pass positions when available
+                positions={work.positions}
+                // @ts-ignore legacy description fallback
                 description={work.description}
               />
             </BlurFade>
@@ -209,7 +234,7 @@ export default function Page() {
           </>
         </div>
       </section>
-      <section id="blog">
+      {/* <section id="blog">
         <div className="space-y-12 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 11.5}>
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -230,7 +255,7 @@ export default function Page() {
             <BlogPreview limit={3} />
           </BlurFade>
         </div>
-      </section>
+      </section> */}
       <section id="hackathons">
         <div className="space-y-12 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 13}>

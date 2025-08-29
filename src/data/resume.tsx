@@ -71,6 +71,47 @@ export const DATA = {
 
   work: [
     {
+      company: "Mem0 (YC S24)",
+      href: "https://mem0.ai/",
+      badges: ["Remote"],
+      location: "San Francisco Bay Area · Remote",
+      logoUrl: "/mem0_logo.jpeg",
+      // Multiple positions (promotions)
+      positions: [
+        {
+          title: "Member of Technical Staff",
+          employmentType: "Full-time",
+          start: "Jan 2025",
+          end: "Present",
+          bullets: [
+            "Maintains TypeScript SDK (80k+ monthly downloads)",
+            "Developed TS Community SDK on top of LangChain (21k+ monthly downloads)",
+            "Developed Mem0 MCP on Smithery (18k+ monthly downloads)",
+            "Developed OSS SDK in TypeScript",
+            "Co-developed OpenMemory Cloud and MCP Server/UI",
+            "Co-developed OpenMemory Chrome Extension",
+            "Built integrations for LangChain, ElizaOS, MCP, Flowise, Mastra, and more",
+            "Drove minor/major UI revamps and created multiple demo apps",
+            "Managed and improved AWS infrastructure; introduced and enhanced IaC",
+            "Set up alerting and monitoring mechanisms",
+          ],
+        },
+        {
+          title: "Frontend Developer",
+          employmentType: "Internship",
+          start: "Oct 2024",
+          end: "Dec 2024",
+          bullets: [
+            "Revamped Mem0 platform frontend",
+            "Migrated servers from EC2 to EKS",
+            "Implemented CI/CD pipeline",
+            "Created Vercel AI SDK for Mem0 provider",
+            "Implemented multi-auth mechanism",
+          ],
+        },
+      ],
+    },
+    {
       company: "DBS Tech India",
       href: "https://www.dbs.com/dbstechindia/index.html",
       badges: [],
@@ -79,8 +120,10 @@ export const DATA = {
       logoUrl: "/dbs-logo.png",
       start: "Jun, 2024",
       end: "Present",
-      description:
-        "Currently working in a hybrid role at DBS Tech India, where I deploy and containerize Spring Boot applications on AWS EKS.",
+      bullets: [
+        "Deploy and containerize Spring Boot applications on AWS EKS",
+        "Operate in a hybrid/remote setup with production workloads",
+      ],
     },
     {
       company: "Soshals",
@@ -91,8 +134,10 @@ export const DATA = {
       logoUrl: "/soshals.jpg",
       start: "Feb, 2024",
       end: "Feb, 2024",
-      description:
-        "As a Frontend Developer at Soshals in February 2024, I worked remotely on Next.js and developed 2 user profile templates within a month.",
+      bullets: [
+        "Built and shipped two user profile templates using Next.js",
+        "Collaborated remotely with rapid iteration and reviews",
+      ],
     },
     {
       company: "Samsung R&D, BLR",
@@ -103,20 +148,11 @@ export const DATA = {
       logoUrl: "/samsung.png",
       start: "Apr, 2023",
       end: "Feb, 2024",
-      description:
-        "As a Prism Research Intern at Samsung Research Institute, Bangalore, from April 2023 to February 2024, I virtually benchmarked DynamoDB performance across different systems, authored and published a research paper on the findings, and was endorsed by my mentor as the best worklet.",
-    },
-    {
-      company: "CODEX",
-      badges: [],
-      href: "https://codex-iter.in/",
-      location: "Remote",
-      title: "Student Coordinator",
-      logoUrl: "/codex-logo.jpeg",
-      start: "Jul, 2022",
-      end: "Present",
-      description:
-        "As a Student Coordinator for CODEX, I organized 1 open-source event, 11 club events, and managed and maintained 5 event websites.",
+      bullets: [
+        "Benchmarked DynamoDB performance across varied system configurations",
+        "Authored and published a research paper based on findings",
+        "Recognized by mentor as the best worklet",
+      ],
     },
   ],
   education: [

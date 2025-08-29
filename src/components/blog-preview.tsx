@@ -48,15 +48,15 @@ export function BlogPreview({ limit = 3 }: { limit?: number }) {
         </div>
       )}
       {posts && (
-        <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
+        <ul className="mb-4 pl-4 divide-y divide-dashed border-l">
           {posts.map((post, id) => (
             <BlurFade
               key={post.slug}
               delay={BLUR_FADE_DELAY * 2 + id * 0.05}
             >
-              <li className="py-4 ml-4">
+              <li className="py-4">
                 <Link href={`/blog/${post.slug}`} className="flex flex-col">
-                  <span className="text-base tracking-tight">
+                  <span className="text-base font-medium tracking-tight leading-6">
                     {post.title}
                   </span>
                   <span className="text-xs text-muted-foreground">

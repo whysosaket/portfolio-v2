@@ -18,6 +18,15 @@ interface ResumeCardProps {
   badges?: readonly string[];
   period: string;
   description?: string;
+  bullets?: string[];
+  positions?: {
+    title: string;
+    employmentType?: string;
+    start: string;
+    end: string;
+    bullets?: string[];
+  }[];
+  defaultOpen?: boolean;
 }
 export const ResumeCard = ({
   logoUrl,
@@ -28,11 +37,17 @@ export const ResumeCard = ({
   badges,
   period,
   description,
+  bullets,
+  positions,
+  defaultOpen,
 }: ResumeCardProps) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(!!defaultOpen);
+
+  const hasDetails =
+    !!description || (bullets && bullets.length > 0) || (positions && positions.length > 0);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    if (description) {
+    if (hasDetails) {
       e.preventDefault();
       setIsExpanded(!isExpanded);
     }
@@ -86,7 +101,7 @@ export const ResumeCard = ({
             </div>
             {subtitle && <div className="font-sans text-xs">{subtitle}</div>}
           </CardHeader>
-          {description && (
+          {(hasDetails) && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{
@@ -100,7 +115,40 @@ export const ResumeCard = ({
               }}
               className="mt-2 text-xs sm:text-sm"
             >
-              {description}
+              {positions && positions.length > 0 ? (
+                <div className="space-y-4">
+                  {positions.map((pos, idx) => (
+                    <div key={idx} className="space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="font-medium">
+                          {pos.title}
+                          {pos.employmentType && (
+                            <span className="ml-2 text-muted-foreground">· {pos.employmentType}</span>
+                          )}
+                        </div>
+                        <div className="text-[11px] tabular-nums text-muted-foreground">
+                          {pos.start} - {pos.end}
+                        </div>
+                      </div>
+                      {pos.bullets && pos.bullets.length > 0 && (
+                        <ul className="list-disc pl-5 space-y-1">
+                          {pos.bullets.map((b, i) => (
+                            <li key={i}>{b}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : bullets && bullets.length > 0 ? (
+                <ul className="list-disc pl-5 space-y-1">
+                  {bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              ) : (
+                <>{description}</>
+              )}
             </motion.div>
           )}
         </div>
