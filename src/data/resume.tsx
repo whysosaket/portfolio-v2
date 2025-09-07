@@ -76,6 +76,8 @@ export const DATA = {
       location: "San Francisco Bay Area · Remote",
       logoUrl: "/mem0_logo.jpeg",
       // Multiple positions (promotions)
+      start: "Jan 2025",
+      end: "Present",
       positions: [
         {
           title: "Member of Technical Staff",
