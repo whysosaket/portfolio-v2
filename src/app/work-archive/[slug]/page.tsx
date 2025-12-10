@@ -1,12 +1,11 @@
-import { getPost, getBlogPosts } from "@/data/blog";
+import { getWorkArchiveEntry, getAllWorkArchiveEntries } from "@/lib/work_archive";
 import { DATA } from "@/data/resume";
 import { formatDate } from "@/lib/utils";
-import { BlogSidebar } from "@/components/blog-sidebar";
-import BlurFade from "@/components/magicui/blur-fade";
-import Link from "next/link";
+import { WorkArchiveSidebar } from "@/components/work-archive-sidebar";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
+import BlurFade from "@/components/magicui/blur-fade";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
@@ -15,25 +14,24 @@ export async function generateMetadata({
     slug: string;
   };
 }): Promise<Metadata | undefined> {
-  let post = await getPost(params.slug);
+  let entry = await getWorkArchiveEntry(params.slug);
 
-  let {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata;
+  if (!entry) {
+    return undefined;
+  }
+
+  let { title, summary, image, date } = entry.metadata;
   let ogImage = image ? `${DATA.url}${image}` : `${DATA.url}/og?title=${title}`;
 
   return {
     title,
-    description,
+    description: summary,
     openGraph: {
       title,
-      description,
+      description: summary,
       type: "article",
-      publishedTime,
-      url: `${DATA.url}/blog/${post.slug}`,
+      publishedTime: date,
+      url: `${DATA.url}/work-archive/${entry.slug}`,
       images: [
         {
           url: ogImage,
@@ -43,7 +41,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title,
-      description,
+      description: summary,
       images: [ogImage],
     },
   };
@@ -51,45 +49,46 @@ export async function generateMetadata({
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default async function Blog({
+export default async function WorkArchiveEntry({
   params,
 }: {
   params: {
     slug: string;
   };
 }) {
-  let post = await getPost(params.slug);
+  let entry = await getWorkArchiveEntry(params.slug);
 
-  if (!post) {
+  if (!entry) {
     notFound();
   }
 
-  // Get all posts for sidebar
-  const allPosts = await getBlogPosts();
-  const entriesForSidebar = allPosts.map((p) => ({
-    slug: p.slug,
-    title: p.metadata.title,
-    publishedAt: p.metadata.publishedAt,
-    favorite: (p.metadata as any).favorite,
-    groupLabel: (p.metadata as any).groupLabel,
+  // Get all entries for sidebar
+  const allEntries = await getAllWorkArchiveEntries();
+  const entriesForSidebar = allEntries.map((e) => ({
+    slug: e.slug,
+    title: e.metadata.title,
+    company: e.metadata.company,
+    date: e.metadata.date,
+    favorite: e.metadata.favorite,
+    groupLabel: e.metadata.groupLabel,
   }));
 
   return (
-    <section id="blog" className="space-y-12 w-[90%] max-w-[1400px] mx-auto py-2">
+    <section className="space-y-12 w-[90%] max-w-[1400px] mx-auto py-2">
       <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
         <div className="flex justify-start mb-4">
           <Link
-            href="/blog"
+            href="/work-archive"
             className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-1"
           >
-            ← Back to blog
+            ← Back to work archive
           </Link>
         </div>
       </BlurFade>
 
       <div className="flex flex-col md:flex-row gap-8 w-full">
         <BlurFade delay={BLUR_FADE_DELAY}>
-          <BlogSidebar entries={entriesForSidebar} currentSlug={post.slug} />
+          <WorkArchiveSidebar entries={entriesForSidebar} currentSlug={entry.slug} />
         </BlurFade>
 
         <div className="flex-1">
@@ -100,15 +99,15 @@ export default async function Blog({
               dangerouslySetInnerHTML={{
                 __html: JSON.stringify({
                   "@context": "https://schema.org",
-                  "@type": "BlogPosting",
-                  headline: post.metadata.title,
-                  datePublished: post.metadata.publishedAt,
-                  dateModified: post.metadata.publishedAt,
-                  description: post.metadata.summary,
-                  image: post.metadata.image
-                    ? `${DATA.url}${post.metadata.image}`
-                    : `${DATA.url}/og?title=${post.metadata.title}`,
-                  url: `${DATA.url}/blog/${post.slug}`,
+                  "@type": "Article",
+                  headline: entry.metadata.title,
+                  datePublished: entry.metadata.date,
+                  dateModified: entry.metadata.date,
+                  description: entry.metadata.summary,
+                  image: entry.metadata.image
+                    ? `${DATA.url}${entry.metadata.image}`
+                    : `${DATA.url}/og?title=${entry.metadata.title}`,
+                  url: `${DATA.url}/work-archive/${entry.slug}`,
                   author: {
                     "@type": "Person",
                     name: DATA.name,
@@ -117,18 +116,21 @@ export default async function Blog({
               }}
             />
             <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
-              {post.metadata.title}
+              {entry.metadata.title}
             </h1>
             <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
-              <Suspense fallback={<p className="h-5" />}>
+              <div className="flex items-center gap-4">
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  {formatDate(post.metadata.publishedAt)}
+                  {formatDate(entry.metadata.date)}
                 </p>
-              </Suspense>
+                <span className="text-sm text-muted-foreground">
+                  {entry.metadata.company}
+                </span>
+              </div>
             </div>
             <article
               className="prose dark:prose-invert max-w-[650px]"
-              dangerouslySetInnerHTML={{ __html: post.source }}
+              dangerouslySetInnerHTML={{ __html: entry.source! }}
             ></article>
           </BlurFade>
         </div>

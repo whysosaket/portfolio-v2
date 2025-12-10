@@ -21,7 +21,7 @@ export default async function BlogPage() {
   const posts = await getBlogPosts();
 
   return (
-    <section className="space-y-12 w-full py-2">
+    <section className="space-y-12 w-[90%] max-w-[1400px] mx-auto py-2">
       <BlurFade delay={BLUR_FADE_DELAY}>
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-2">
           <div className="space-y-2">
@@ -38,7 +38,7 @@ export default async function BlogPage() {
         </div>
       </BlurFade>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 w-full">
         {posts
           .sort((a, b) =>
             new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)

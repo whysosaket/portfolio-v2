@@ -4,9 +4,12 @@ import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { CategoryCard } from "@/components/category-card";
 import { ResumeCard } from "@/components/resume-card";
+import { WorkArchiveCard } from "@/components/work-archive-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
+import { WORK_ARCHIVE_COMPANIES } from "@/data/work_archive";
+import { config } from "@/data/config";
 import { getTopCategories, categoryToSlug } from "@/lib/projects";
 import Link from "next/link";
 import { BlogPreview } from "@/components/blog-preview";
@@ -18,7 +21,7 @@ const BLUR_FADE_DELAY = 0.04;
 export default function Page() {
 
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-10">
+    <main className="flex flex-col min-h-[100dvh] space-y-10 max-w-2xl mx-auto w-full">
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 flex justify-between">
@@ -188,28 +191,76 @@ export default function Page() {
           </div>
         </div>
       </section>
-      {/* <section id="blog">
-        <div className="space-y-12 w-full py-6">
-          <BlurFade delay={BLUR_FADE_DELAY * 11.5}>
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Blog
+      {config.enableBlog && (
+        <section id="blog">
+          <div className="space-y-12 w-full py-6">
+            <BlurFade delay={BLUR_FADE_DELAY * 11.5}>
+              <div className="flex flex-col items-center justify-center space-y-4 text-center">
+                <div className="space-y-2">
+                  <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                    Blog
+                  </div>
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                    Read my latest thoughts
+                  </h2>
+                  <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                    Short notes on software, learning, and building things.
+                  </p>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Read my latest thoughts
-                </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Short notes on software, learning, and building things.
-                </p>
               </div>
+            </BlurFade>
+            <BlurFade delay={BLUR_FADE_DELAY * 12}>
+              <BlogPreview limit={3} />
+            </BlurFade>
+          </div>
+        </section>
+      )}
+      {config.enableWorkArchive && (
+        <section id="work-archive">
+          <div className="space-y-12 w-full py-6">
+            <BlurFade delay={BLUR_FADE_DELAY * 12.5}>
+              <div className="flex flex-col items-center justify-center space-y-4 text-center">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                    Work Archive
+                  </h2>
+                  <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                    Detailed experiences and projects from my work journey.
+                  </p>
+                </div>
+              </div>
+            </BlurFade>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 max-w-[1000px] mx-auto">
+              {WORK_ARCHIVE_COMPANIES.map((company, id) => (
+                <BlurFade
+                  key={company.slug}
+                  delay={BLUR_FADE_DELAY * 13 + id * 0.05}
+                >
+                  <WorkArchiveCard
+                    company={company.name}
+                    logoUrl={company.logoUrl}
+                    href={`/work-archive?company=${company.slug}`}
+                  />
+                </BlurFade>
+              ))}
             </div>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 12}>
-            <BlogPreview limit={3} />
-          </BlurFade>
-        </div>
-      </section> */}
+            <div className="flex items-center justify-center w-full">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <Link
+                  href="/work-archive"
+                  className="shadow-2xl bg-white text-black px-4 py-2 text-sm rounded-md hover:bg-gray-200 transition-colors"
+                >
+                  View All Work Archive
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      )}
       <section id="hackathons">
         <div className="space-y-12 w-full py-6">
           <BlurFade delay={BLUR_FADE_DELAY * 13}>

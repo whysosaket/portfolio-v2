@@ -1,0 +1,92 @@
+---
+title: "Migrating from EC2 to EKS: A Kubernetes Journey"
+company: "mem0"
+date: "2024-10-22"
+favorite: true
+groupLabel: "October 2024"
+summary: "Successfully migrated Mem0's infrastructure from EC2 instances to Amazon EKS, improving scalability and operational efficiency."
+image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=450&fit=crop"
+---
+
+One of the most impactful infrastructure projects I worked on at Mem0 was migrating our servers from traditional EC2 instances to Amazon Elastic Kubernetes Service (EKS). This migration was crucial for improving our platform's scalability and operational efficiency.
+
+## Why EKS?
+
+As Mem0 grew, we needed a more robust infrastructure solution. EC2 instances were becoming difficult to manage at scale, and we needed:
+
+- Better resource utilization
+- Improved scalability and auto-scaling capabilities
+- Container orchestration for easier deployments
+- Better isolation and security
+- Simplified management of microservices
+
+## The Migration Process
+
+### Planning Phase
+
+I started by mapping out all existing services and their dependencies. This involved:
+- Documenting current infrastructure setup
+- Identifying all services and their resource requirements
+- Planning the containerization strategy
+- Designing the Kubernetes cluster architecture
+
+### Containerization
+
+I containerized all our services using Docker, ensuring:
+- Consistent environments across development and production
+- Proper dependency management
+- Optimized image sizes
+- Security best practices
+
+### Kubernetes Configuration
+
+I created comprehensive Kubernetes manifests including:
+- Deployments for each service
+- Services for internal communication
+- Ingress controllers for external access
+- ConfigMaps and Secrets for configuration management
+- Horizontal Pod Autoscalers for automatic scaling
+
+### Migration Strategy
+
+The migration was done in phases:
+1. Set up the EKS cluster alongside existing EC2 infrastructure
+2. Deploy services to EKS in a canary deployment approach
+3. Gradually shift traffic from EC2 to EKS
+4. Monitor and optimize performance
+5. Complete migration and decommission EC2 instances
+
+## Challenges and Solutions
+
+### Challenge: Zero Downtime Migration
+
+**Solution**: Implemented blue-green deployment strategy with careful traffic routing and rollback capabilities.
+
+### Challenge: Learning Curve
+
+**Solution**: Invested time in understanding Kubernetes concepts, best practices, and Mem0's specific requirements.
+
+### Challenge: Resource Optimization
+
+**Solution**: Used Kubernetes resource requests and limits, along with monitoring tools, to optimize resource allocation.
+
+## Results
+
+The migration to EKS brought significant improvements:
+
+- **Scalability**: Easy horizontal scaling based on demand
+- **Reliability**: Better fault tolerance and self-healing capabilities
+- **Efficiency**: Improved resource utilization and cost optimization
+- **Deployment**: Faster and more reliable deployments
+- **Operations**: Simplified infrastructure management
+
+## Key Takeaways
+
+This project was a great learning experience in:
+- Kubernetes and container orchestration
+- Infrastructure as Code principles
+- Cloud architecture and best practices
+- Managing complex migrations with minimal disruption
+- Working with AWS services at scale
+
+The EKS migration set up Mem0 for better scalability and operational excellence as we continued to grow.
