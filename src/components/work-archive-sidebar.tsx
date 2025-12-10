@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronRight, Star } from "lucide-react";
+import { ChevronDown, ChevronRight, Star, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface WorkArchiveEntry {
@@ -26,7 +27,12 @@ export function WorkArchiveSidebar({
   currentSlug,
   basePath = "/work-archive",
 }: WorkArchiveSidebarProps) {
+  const router = useRouter();
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
+
+  const handleEntryClick = (slug: string) => {
+    router.push(`${basePath}?slug=${slug}`);
+  };
 
   const favorites = entries.filter((entry) => entry.favorite);
   const nonFavorites = entries.filter((entry) => !entry.favorite);
@@ -51,9 +57,31 @@ export function WorkArchiveSidebar({
     setOpenGroups(newOpen);
   };
 
+  if (entries.length === 0) {
+    return (
+      <div className="w-full md:w-64 flex-shrink-0">
+        <div className="text-sm text-muted-foreground text-center py-8">
+          No entries available
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full md:w-64 flex-shrink-0 space-y-6">
-      {/* Favorites Section */}
+    <div className="w-full md:w-64 flex-shrink-0 h-full overflow-y-auto overflow-x-hidden">
+      {/* Back Button */}
+      <div className="mb-4 pb-4 border-b">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-3 py-2 rounded-md hover:bg-muted"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span>Back to Home</span>
+        </Link>
+      </div>
+
+      <div className="space-y-6 pr-2">
+        {/* Favorites Section */}
       {favorites.length > 0 && (
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
@@ -63,17 +91,18 @@ export function WorkArchiveSidebar({
           <ul className="space-y-1">
             {favorites.map((entry) => (
               <li key={entry.slug}>
-                <Link
-                  href={`${basePath}/${entry.slug}`}
+                <button
+                  onClick={() => handleEntryClick(entry.slug)}
                   className={cn(
-                    "block px-3 py-2 rounded-md text-sm transition-colors",
+                    "w-full text-left px-3 py-2 rounded-md text-sm transition-colors truncate",
                     currentSlug === entry.slug
                       ? "bg-foreground text-background font-medium"
                       : "hover:bg-muted text-muted-foreground hover:text-foreground"
                   )}
+                  title={entry.title}
                 >
                   {entry.title}
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
@@ -97,11 +126,11 @@ export function WorkArchiveSidebar({
                   onClick={() => toggleGroup(label)}
                   className="w-full flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 >
-                  <span>{label}</span>
+                  <span className="truncate flex-1 text-left">{label}</span>
                   {isOpen ? (
-                    <ChevronDown className="h-4 w-4" />
+                    <ChevronDown className="h-4 w-4 flex-shrink-0 ml-2" />
                   ) : (
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="h-4 w-4 flex-shrink-0 ml-2" />
                   )}
                 </button>
                 <AnimatePresence>
@@ -117,17 +146,18 @@ export function WorkArchiveSidebar({
                         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                         .map((entry) => (
                           <li key={entry.slug}>
-                            <Link
-                              href={`${basePath}/${entry.slug}`}
+                            <button
+                              onClick={() => handleEntryClick(entry.slug)}
                               className={cn(
-                                "block px-3 py-2 rounded-md text-sm transition-colors",
+                                "w-full text-left px-3 py-2 rounded-md text-sm transition-colors truncate",
                                 currentSlug === entry.slug
                                   ? "bg-foreground text-background font-medium"
                                   : "hover:bg-muted text-muted-foreground hover:text-foreground"
                               )}
+                              title={entry.title}
                             >
                               {entry.title}
-                            </Link>
+                            </button>
                           </li>
                         ))}
                     </motion.ul>
@@ -136,6 +166,7 @@ export function WorkArchiveSidebar({
               </div>
             );
           })}
+      </div>
       </div>
     </div>
   );

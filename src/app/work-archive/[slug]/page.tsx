@@ -74,25 +74,21 @@ export default async function WorkArchiveEntry({
   }));
 
   return (
-    <section className="space-y-12 w-[90%] max-w-[1400px] mx-auto py-2">
-      <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
-        <div className="flex justify-start mb-4">
-          <Link
-            href="/work-archive"
-            className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-1"
-          >
-            ← Back to work archive
-          </Link>
-        </div>
-      </BlurFade>
-
-      <div className="flex flex-col md:flex-row gap-8 w-full">
-        <BlurFade delay={BLUR_FADE_DELAY}>
+    <div className="w-full h-screen overflow-hidden flex gap-8 px-6">
+      {/* Fixed Sidebar */}
+      <aside className="hidden md:block w-64 flex-shrink-0 border-r pr-6 overflow-hidden">
+        <div className="h-full overflow-y-auto overflow-x-hidden hide-scrollbar">
           <WorkArchiveSidebar entries={entriesForSidebar} currentSlug={entry.slug} />
-        </BlurFade>
+        </div>
+      </aside>
 
-        <div className="flex-1">
-          <BlurFade delay={BLUR_FADE_DELAY * 2}>
+      {/* Scrollable Content */}
+      <main className="flex-1 overflow-y-auto overflow-x-hidden hide-scrollbar relative">
+        {/* Fade gradient at bottom */}
+        <div className="sticky bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+        
+        <div className="relative">
+          <article className="space-y-6 pb-24">
             <script
               type="application/ld+json"
               suppressHydrationWarning
@@ -115,26 +111,21 @@ export default async function WorkArchiveEntry({
                 }),
               }}
             />
-            <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
+            <h1 className="title font-medium text-2xl tracking-tighter">
               {entry.metadata.title}
             </h1>
-            <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
-              <div className="flex items-center gap-4">
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  {formatDate(entry.metadata.date)}
-                </p>
-                <span className="text-sm text-muted-foreground">
-                  {entry.metadata.company}
-                </span>
-              </div>
+            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
+              <time>{formatDate(entry.metadata.date)}</time>
+              <span>•</span>
+              <span>{entry.metadata.company}</span>
             </div>
-            <article
-              className="prose dark:prose-invert max-w-[650px]"
+            <div
+              className="prose dark:prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: entry.source! }}
-            ></article>
-          </BlurFade>
+            />
+          </article>
         </div>
-      </div>
-    </section>
+      </main>
+    </div>
   );
 }

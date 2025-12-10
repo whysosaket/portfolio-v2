@@ -1,8 +1,9 @@
-import BlurFade from "@/components/magicui/blur-fade";
 import { WorkArchiveSidebar } from "@/components/work-archive-sidebar";
-import { WorkArchiveTimeline } from "@/components/work-archive-timeline";
-import { getAllWorkArchiveEntries, getEntriesByCompany, sortEntriesChronologically } from "@/lib/work_archive";
-import Link from "next/link";
+import { EmptyState } from "@/components/empty-state";
+import { getAllWorkArchiveEntries, getEntriesByCompany, sortEntriesChronologically, getWorkArchiveEntry } from "@/lib/work_archive";
+import { formatDate } from "@/lib/utils";
+import { DATA } from "@/data/resume";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Work Archive",
@@ -12,19 +13,23 @@ export const metadata = {
 const BLUR_FADE_DELAY = 0.04;
 
 interface WorkArchivePageProps {
-  searchParams: { company?: string };
+  searchParams: { company?: string; slug?: string };
 }
 
 export default async function WorkArchivePage({ searchParams }: WorkArchivePageProps) {
-  let entries = await getAllWorkArchiveEntries();
+  let allEntries = await getAllWorkArchiveEntries();
   
+  // Filter by company if specified
+  let filteredEntries = allEntries;
   if (searchParams.company) {
-    entries = getEntriesByCompany(entries, searchParams.company);
+    filteredEntries = getEntriesByCompany(allEntries, searchParams.company);
   }
 
-  const sortedEntries = sortEntriesChronologically(entries);
+  const sortedEntries = sortEntriesChronologically(filteredEntries);
   
-  const entriesForSidebar = sortedEntries.map((entry) => ({
+  // For sidebar, show all entries (not filtered) so user can navigate
+  const allSortedEntries = sortEntriesChronologically(allEntries);
+  const entriesForSidebar = allSortedEntries.map((entry) => ({
     slug: entry.slug,
     title: entry.metadata.title,
     company: entry.metadata.company,
@@ -33,53 +38,68 @@ export default async function WorkArchivePage({ searchParams }: WorkArchivePageP
     groupLabel: entry.metadata.groupLabel,
   }));
 
-  const entriesForTimeline = sortedEntries.map((entry) => ({
-    slug: entry.slug,
-    title: entry.metadata.title,
-    company: entry.metadata.company,
-    date: entry.metadata.date,
-    summary: entry.metadata.summary,
-    image: entry.metadata.image,
-  }));
+  // Get the entry to display (from query param or first filtered entry)
+  const displaySlug = searchParams.slug || sortedEntries[0]?.slug;
+  const displayEntry = displaySlug ? await getWorkArchiveEntry(displaySlug) : null;
 
   return (
-    <section className="space-y-12 w-[90%] max-w-[1400px] mx-auto py-2">
-      <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
-        <div className="flex justify-start mb-4">
-          <Link
-            href="/"
-            className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-1"
-          >
-            ← Back to home
-          </Link>
+    <div className="w-full h-screen overflow-hidden flex gap-8 px-6">
+      {/* Fixed Sidebar */}
+      <aside className="hidden md:block w-64 flex-shrink-0 border-r pr-6 overflow-hidden">
+        <div className="h-full overflow-y-auto overflow-x-hidden hide-scrollbar">
+          <Suspense fallback={<div className="text-sm text-muted-foreground">Loading...</div>}>
+            {entriesForSidebar.length > 0 ? (
+              <WorkArchiveSidebar entries={entriesForSidebar} currentSlug={displaySlug} />
+            ) : (
+              <EmptyState type="work-archive" />
+            )}
+          </Suspense>
         </div>
-      </BlurFade>
-      
-      <BlurFade delay={BLUR_FADE_DELAY}>
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-2">
-          <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-              Work Archive
-            </div>
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              My Work Journey
-            </h1>
-            <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Detailed experiences and projects from my career.
-            </p>
-          </div>
-        </div>
-      </BlurFade>
+      </aside>
 
-      <div className="flex flex-col md:flex-row gap-8 w-full">
-        <BlurFade delay={BLUR_FADE_DELAY * 2}>
-          <WorkArchiveSidebar entries={entriesForSidebar} />
-        </BlurFade>
+      {/* Scrollable Content */}
+      <main className="flex-1 overflow-y-auto overflow-x-hidden hide-scrollbar relative">
+        {/* Fade gradient at bottom */}
+        <div className="sticky bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
         
-        <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <WorkArchiveTimeline entries={entriesForTimeline} />
-        </BlurFade>
-      </div>
-    </section>
+        <div className="relative">
+          {displayEntry ? (
+            <article className="space-y-6 pb-24">
+              <script
+                type="application/ld+json"
+                suppressHydrationWarning
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    headline: displayEntry.metadata.title,
+                    datePublished: displayEntry.metadata.date,
+                    dateModified: displayEntry.metadata.date,
+                    description: displayEntry.metadata.summary,
+                    image: displayEntry.metadata.image
+                      ? `${DATA.url}${displayEntry.metadata.image}`
+                      : undefined,
+                  }),
+                }}
+              />
+              <h1 className="title font-medium text-2xl tracking-tighter">
+                {displayEntry.metadata.title}
+              </h1>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
+                <time>{formatDate(displayEntry.metadata.date)}</time>
+                <span>•</span>
+                <span>{displayEntry.metadata.company}</span>
+              </div>
+              <div
+                className="prose dark:prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: displayEntry.source! }}
+              />
+            </article>
+          ) : (
+            <EmptyState type="work-archive" />
+          )}
+        </div>
+      </main>
+    </div>
   );
 }

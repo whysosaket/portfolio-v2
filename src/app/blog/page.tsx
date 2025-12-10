@@ -1,14 +1,8 @@
-import BlurFade from "@/components/magicui/blur-fade";
-import { getBlogPosts } from "@/data/blog";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { getBlogPosts, getPost } from "@/data/blog";
+import { BlogSidebar } from "@/components/blog-sidebar";
+import { EmptyState } from "@/components/empty-state";
 import { formatDate } from "@/lib/utils";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Blog",
@@ -17,75 +11,80 @@ export const metadata = {
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: { slug?: string };
+}) {
   const posts = await getBlogPosts();
+  const sortedPosts = posts.sort((a, b) =>
+    new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt) ? -1 : 1
+  );
+
+  // Get the post to display (from query param or first post)
+  const displaySlug = searchParams.slug || sortedPosts[0]?.slug;
+  const displayPost = displaySlug ? await getPost(displaySlug) : null;
+
+  const entriesForSidebar = sortedPosts.map((p) => ({
+    slug: p.slug,
+    title: p.metadata.title,
+    publishedAt: p.metadata.publishedAt,
+    favorite: (p.metadata as any).favorite,
+    groupLabel: (p.metadata as any).groupLabel,
+  }));
 
   return (
-    <section className="space-y-12 w-[90%] max-w-[1400px] mx-auto py-2">
-      <BlurFade delay={BLUR_FADE_DELAY}>
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-2">
-          <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-              Writing
-            </div>
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              Writing on building, shipping, and staying curious
-            </h1>
-            <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Short notes, experiments, and lessons from the road.
-            </p>
-          </div>
+    <div className="w-full h-screen overflow-hidden flex gap-8 px-6">
+      {/* Fixed Sidebar */}
+      <aside className="hidden md:block w-64 flex-shrink-0 border-r pr-6 overflow-hidden">
+        <div className="h-full overflow-y-auto overflow-x-hidden hide-scrollbar">
+          <Suspense fallback={<div className="text-sm text-muted-foreground">Loading...</div>}>
+            <BlogSidebar entries={entriesForSidebar} currentSlug={displaySlug} />
+          </Suspense>
         </div>
-      </BlurFade>
+      </aside>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 w-full">
-        {posts
-          .sort((a, b) =>
-            new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
-              ? -1
-              : 1
-          )
-          .map((post, id) => (
-            <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={post.slug}>
-              <Link href={`/blog/${post.slug}`} className="block group">
-                <Card className="overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full">
-                  <div className="relative w-full bg-muted/50">
-                    {post.metadata.image ? (
-                      <div className="relative w-full aspect-[16/9]">
-                        <Image
-                          src={post.metadata.image}
-                          alt={post.metadata.title}
-                          fill
-                          sizes="(max-width: 800px) 100vw, 800px"
-                          className="object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div className="h-40 w-full bg-muted flex items-center justify-center text-muted-foreground text-sm">
-                        No image
-                      </div>
-                    )}
-                  </div>
-                  <CardHeader className="space-y-1.5 p-3">
-                    <CardTitle className="text-lg font-semibold tracking-tight group-hover:underline">
-                      {post.metadata.title}
-                    </CardTitle>
-                    <time className="font-sans text-[11px] text-muted-foreground">
-                      {formatDate(post.metadata.publishedAt)}
-                    </time>
-                  </CardHeader>
-                  {post.metadata.summary && (
-                    <CardContent className="p-3 pt-0">
-                      <p className="text-[13px] leading-6 text-muted-foreground overflow-hidden">
-                        {post.metadata.summary}
-                      </p>
-                    </CardContent>
-                  )}
-                </Card>
-              </Link>
-            </BlurFade>
-          ))}
-      </div>
-    </section>
+      {/* Scrollable Content */}
+      <main className="flex-1 overflow-y-auto overflow-x-hidden hide-scrollbar relative">
+        {/* Fade gradient at bottom */}
+        <div className="sticky bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+        
+        <div className="relative">
+          {displayPost ? (
+            <article className="space-y-6 pb-24">
+              <script
+                type="application/ld+json"
+                suppressHydrationWarning
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "BlogPosting",
+                    headline: displayPost.metadata.title,
+                    datePublished: displayPost.metadata.publishedAt,
+                    dateModified: displayPost.metadata.publishedAt,
+                    description: displayPost.metadata.summary,
+                    image: displayPost.metadata.image
+                      ? `${process.env.NEXT_PUBLIC_URL || ""}${displayPost.metadata.image}`
+                      : undefined,
+                  }),
+                }}
+              />
+              <h1 className="title font-medium text-2xl tracking-tighter">
+                {displayPost.metadata.title}
+              </h1>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
+                <time>{formatDate(displayPost.metadata.publishedAt)}</time>
+              </div>
+              <div
+                className="prose dark:prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: displayPost.source }}
+              />
+            </article>
+          ) : (
+            <EmptyState type="blog" />
+          )}
+        </div>
+      </main>
+    </div>
   );
 }
