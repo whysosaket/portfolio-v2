@@ -78,6 +78,7 @@ export const DATA = {
       // Multiple positions (promotions)
       start: "Jan 2025",
       end: "Present",
+      isDefaultOpen: true,
       positions: [
         {
           title: "Member of Technical Staff",
@@ -121,6 +122,7 @@ export const DATA = {
       logoUrl: "/dbs-logo.png",
       start: "Jun, 2024",
       end: "Present",
+      isDefaultOpen: true,
       bullets: [
         "Deploy and containerize Spring Boot applications on AWS EKS",
         "Operate in a hybrid/remote setup with production workloads",
@@ -135,6 +137,7 @@ export const DATA = {
       logoUrl: "/soshals.jpg",
       start: "Feb, 2024",
       end: "Feb, 2024",
+      isDefaultOpen: false,
       bullets: [
         "Built and shipped two user profile templates using Next.js",
         "Collaborated remotely with rapid iteration and reviews",
@@ -149,6 +152,7 @@ export const DATA = {
       logoUrl: "/samsung.png",
       start: "Apr, 2023",
       end: "Feb, 2024",
+      isDefaultOpen: false,
       bullets: [
         "Benchmarked DynamoDB performance across varied system configurations",
         "Authored and published a research paper based on findings",

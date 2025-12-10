@@ -99,6 +99,8 @@ export default function Page() {
                 positions={work.positions}
                 // @ts-ignore legacy description fallback
                 description={work.description}
+                // @ts-ignore isDefaultOpen for work items
+                defaultOpen={work.isDefaultOpen ?? false}
               />
             </BlurFade>
           ))}
