@@ -8,9 +8,9 @@ export const DATA = {
   location: "Bhubaneswar, Odisha",
   locationLink: "https://maps.app.goo.gl/EoxEvx1ryt8MYEKt8",
   description:
-    "Software Engineer. I love building things and helping people. Very active on GitHub.",
+    "Software Engineer. I love building. Very active on GitHub.",
   summary:
-    "I'm currently pursuing a B.Tech in Computer Science and Engineering, focusing on web development with React and Next.js. I've successfully won 5 hackathons, showcasing my ability to create innovative solutions.",
+    "I'm a Founding Engineer at Mem0. I've worked across the stack, leading efforts in frontend, backend, infrastructure, TypeScript SDKs, while also contributing to open source integrations. I currently lead forward deployment and focus on Backend. I'm ambitious and always looking to push my limits.",
   avatarUrl: "/me.jpeg",
   skills: [
     "React",
