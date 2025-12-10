@@ -206,6 +206,7 @@ export const DATA = {
       ],
       image: "",
       video: "/videos/sixthsense.mp4",
+      category: "Full Stack",
     },
     {
       title: "Hackodex Website",
@@ -235,6 +236,7 @@ export const DATA = {
       ],
       image: "",
       video: "/videos/hackodex.mp4",
+      category: "Full Stack",
     },
     {
       title: "Samriddhi",
@@ -268,6 +270,7 @@ export const DATA = {
       ],
       image: "",
       video: "/videos/samriddhi.mp4",
+      category: "Full Stack",
     },
     {
       title: "Saarthi",
@@ -301,6 +304,7 @@ export const DATA = {
       ],
       image: "",
       video: "/videos/saarthi.mp4",
+      category: "Full Stack",
     },
     {
       title: "LinkMyLinks",
@@ -332,6 +336,7 @@ export const DATA = {
       ],
       image: "",
       video: "/videos/linkmylinks.mp4",
+      category: "Full Stack",
     },
     {
       title: "VAttend",
@@ -363,6 +368,7 @@ export const DATA = {
       ],
       image: "",
       video: "/videos/vattend.mp4",
+      category: "Full Stack",
     },
     {
       title: "Carmine Bank",
@@ -393,6 +399,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Backend",
     },
     {
       title: "LinguaConnect",
@@ -427,6 +434,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Full Stack",
     },
     {
       title: "Doctor-Dashboard",
@@ -456,6 +464,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Frontend",
     },
     {
       title: "Codeberg",
@@ -487,6 +496,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Full Stack",
     },
     {
       title: "PayBackPal",
@@ -506,6 +516,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Frontend",
     },
     {
       title: "Portfolio",
@@ -530,6 +541,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Frontend",
     },
     {
       title: "Graviti",
@@ -554,6 +566,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Frontend",
     },
     {
       title: "FindMyMovies",
@@ -578,6 +591,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Backend",
     },
     {
       title: "Musicart",
@@ -609,6 +623,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Full Stack",
     },
     {
       title: "Quizzie",
@@ -640,6 +655,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Full Stack",
     },
     {
       title: "GreenMe",
@@ -659,6 +675,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Full Stack",
     },
     {
       title: "Codex Backend",
@@ -683,6 +700,7 @@ export const DATA = {
       image: "",
       video:
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      category: "Backend",
     },
   ],
   hackathons: [
