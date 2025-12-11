@@ -1,4 +1,4 @@
 export const config = {
-  enableBlog: true,
-  enableWorkArchive: true,
+  enableBlog: false,
+  enableWorkArchive: false,
 } as const;
