@@ -15,9 +15,9 @@ export function ContentPage({
   showEmptyState,
 }: ContentPageProps) {
   return (
-    <div className="w-full h-screen overflow-hidden flex gap-8 px-6">
+    <div className="w-full h-screen overflow-hidden flex gap-8 pr-6">
       {/* Fixed Sidebar */}
-      <aside className="hidden md:block w-64 flex-shrink-0 border-r pr-6 overflow-hidden">
+      <aside className="hidden md:block w-64 flex-shrink-0 border-r overflow-hidden">
         <div className="h-full overflow-y-auto overflow-x-hidden hide-scrollbar">
           <Suspense fallback={<div className="text-sm text-muted-foreground">Loading...</div>}>
             {showEmptyState && emptyStateType ? (

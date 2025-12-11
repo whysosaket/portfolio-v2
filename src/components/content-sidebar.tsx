@@ -77,17 +77,17 @@ export function ContentSidebar({
   return (
     <div className="w-full md:w-64 flex-shrink-0 h-full overflow-y-auto overflow-x-hidden">
       {/* Back Button */}
-      <div className="mb-4 pb-4 border-b">
+      <div className="mb-4 py-4 px-3 border-b">
         <Link
           href="/"
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-3 py-2 rounded-md hover:bg-muted"
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-1 py-2 rounded-md hover:bg-muted"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Home</span>
         </Link>
       </div>
 
-      <div className="space-y-6 pr-2">
+      <div className="space-y-6 px-4">
         {/* Favorites Section */}
         {favorites.length > 0 && (
           <div className="space-y-2">

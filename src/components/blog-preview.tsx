@@ -59,7 +59,7 @@ export function BlogPreview({ limit = 3 }: { limit?: number }) {
                   <span className="text-base font-medium tracking-tight leading-6">
                     {post.title}
                   </span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-muted-foreground my-2">
                     {post.publishedAt}
                   </span>
                   {post.summary && (
@@ -74,9 +74,11 @@ export function BlogPreview({ limit = 3 }: { limit?: number }) {
         </ul>
       )}
       <BlurFade delay={BLUR_FADE_DELAY * 2 + (posts?.length || 0) * 0.05}>
+        <div className="flex items-center justify-end">
         <Link href="/blog" className="text-sm text-primary underline-offset-4 hover:underline">
           View all posts →
         </Link>
+        </div>
       </BlurFade>
     </div>
   );

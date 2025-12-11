@@ -197,9 +197,6 @@ export default function Page() {
             <BlurFade delay={BLUR_FADE_DELAY * 11.5}>
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
-                  <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                    Blog
-                  </div>
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                     Read my latest thoughts
                   </h2>
@@ -230,7 +227,7 @@ export default function Page() {
                 </div>
               </div>
             </BlurFade>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 max-w-[1000px] mx-auto">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 max-w-[1000px] mx-auto">
               {WORK_ARCHIVE_COMPANIES.map((company, id) => (
                 <BlurFade
                   key={company.slug}
@@ -252,7 +249,7 @@ export default function Page() {
               >
                 <Link
                   href="/work-archive"
-                  className="shadow-2xl bg-white text-black px-4 py-2 text-sm rounded-md hover:bg-gray-200 transition-colors"
+                  className="shadow-2xl bg-muted text-foreground px-4 py-2 text-sm rounded-md hover:bg-muted/80 transition-colors"
                 >
                   View All Work Archive
                 </Link>
