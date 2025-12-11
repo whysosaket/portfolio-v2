@@ -1,0 +1,314 @@
+---
+title: "Migrating from EC2 to EKS: A Complete Guide"
+publishedAt: "2024-12-20"
+summary: "A detailed walkthrough of migrating infrastructure from EC2 instances to Amazon EKS, covering planning, implementation, challenges, and lessons learned."
+image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=450&fit=crop"
+favorite: true
+groupLabel: "December 2024"
+---
+
+Migrating from traditional EC2 instances to Amazon Elastic Kubernetes Service (EKS) was one of the most impactful infrastructure projects I've worked on. This post details the complete journey, from initial planning to successful migration.
+
+## Why Migrate to EKS?
+
+Before diving into the migration, let's understand why we made this decision:
+
+![Infrastructure Comparison](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop)
+
+### Challenges with EC2
+
+- **Manual Scaling**: Required manual intervention for scaling
+- **Resource Waste**: Underutilized instances during low traffic
+- **Deployment Complexity**: Manual deployment processes
+- **Limited Isolation**: Services running on shared instances
+- **Operational Overhead**: High maintenance requirements
+
+### Benefits of EKS
+
+- **Auto-scaling**: Horizontal Pod Autoscaler (HPA) for automatic scaling
+- **Better Resource Utilization**: Efficient container orchestration
+- **Simplified Deployments**: Kubernetes-native deployment strategies
+- **Service Isolation**: Each service in its own pod
+- **Self-healing**: Automatic restart of failed containers
+
+## Migration Planning
+
+### Phase 1: Assessment
+
+We started by assessing our current infrastructure:
+
+| Component | EC2 Setup | Target EKS Setup |
+|-----------|-----------|------------------|
+| Web Server | 3x t3.medium | Deployment with 3 replicas |
+| API Server | 2x t3.large | Deployment with 2 replicas |
+| Database | RDS (separate) | RDS (unchanged) |
+| Cache | ElastiCache | ElastiCache (unchanged) |
+| Load Balancer | ALB | ALB + Ingress Controller |
+
+### Phase 2: Architecture Design
+
+![EKS Architecture](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop)
+
+The new architecture included:
+
+1. **EKS Cluster**: Managed Kubernetes cluster
+2. **Node Groups**: Auto-scaling EC2 instances for worker nodes
+3. **Ingress Controller**: NGINX Ingress for routing
+4. **Service Mesh**: Considered but deferred for Phase 2
+5. **Monitoring**: CloudWatch + Prometheus integration
+
+## Implementation Steps
+
+### Step 1: Containerization
+
+First, we containerized all our applications:
+
+```dockerfile
+# Example Dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
+Key considerations:
+- Multi-stage builds for smaller images
+- Proper layer caching
+- Security scanning
+- Image optimization
+
+### Step 2: Kubernetes Manifests
+
+We created comprehensive Kubernetes manifests:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-server
+  template:
+    metadata:
+      labels:
+        app: web-server
+    spec:
+      containers:
+      - name: web-server
+        image: myregistry/web-server:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+```
+
+### Step 3: Service Configuration
+
+Services for internal communication:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-server-service
+spec:
+  selector:
+    app: web-server
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: ClusterIP
+```
+
+### Step 4: Ingress Setup
+
+NGINX Ingress for external access:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-server-service
+            port:
+              number: 80
+```
+
+## Migration Strategy
+
+We used a **blue-green deployment** approach:
+
+### Timeline
+
+| Week | Activity | Status |
+|------|----------|--------|
+| 1-2 | Planning & Design | ✅ Complete |
+| 3-4 | Containerization | ✅ Complete |
+| 5-6 | EKS Cluster Setup | ✅ Complete |
+| 7-8 | Testing & Validation | ✅ Complete |
+| 9 | Migration Execution | ✅ Complete |
+| 10 | Monitoring & Optimization | ✅ Complete |
+
+### Migration Process
+
+1. **Parallel Run**: Both EC2 and EKS running simultaneously
+2. **Traffic Splitting**: Gradually shifted traffic using weighted routing
+3. **Monitoring**: Close monitoring of metrics and errors
+4. **Rollback Plan**: Ability to quickly revert if issues arise
+5. **Cutover**: Final switch after validation
+
+## Challenges and Solutions
+
+### Challenge 1: Learning Curve
+
+**Problem**: Team was new to Kubernetes concepts.
+
+**Solution**: 
+- Comprehensive training sessions
+- Pair programming during migration
+- Extensive documentation
+- Starting with non-critical services
+
+### Challenge 2: Stateful Services
+
+**Problem**: Some services required persistent storage.
+
+**Solution**:
+- Used EBS volumes with PersistentVolumeClaims
+- Implemented proper backup strategies
+- Tested failover scenarios
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+```
+
+### Challenge 3: Networking Complexity
+
+**Problem**: Service discovery and networking in Kubernetes.
+
+**Solution**:
+- Used Kubernetes DNS for service discovery
+- Implemented Network Policies for security
+- Properly configured ingress rules
+
+### Challenge 4: Resource Optimization
+
+**Problem**: Determining right resource requests/limits.
+
+**Solution**:
+- Started with generous limits
+- Monitored actual usage
+- Gradually optimized based on metrics
+- Used Vertical Pod Autoscaler (VPA) for recommendations
+
+## Results and Metrics
+
+### Performance Improvements
+
+| Metric | Before (EC2) | After (EKS) | Improvement |
+|--------|--------------|-------------|-------------|
+| Deployment Time | 15-20 min | 3-5 min | 75% faster |
+| Resource Utilization | 40% | 75% | 87% better |
+| Auto-scaling Response | Manual | < 2 min | Automated |
+| Cost per Request | $0.0012 | $0.0008 | 33% reduction |
+
+### Operational Benefits
+
+- **Zero-downtime deployments**: Rolling updates without service interruption
+- **Self-healing**: Automatic recovery from failures
+- **Better observability**: Kubernetes-native monitoring
+- **Easier rollbacks**: Quick reversion to previous versions
+
+## Key Learnings
+
+### What Went Well
+
+1. **Thorough Planning**: Extensive planning paid off
+2. **Incremental Approach**: Migrating service by service reduced risk
+3. **Team Training**: Investing in team education was crucial
+4. **Monitoring**: Comprehensive monitoring caught issues early
+
+### What Could Be Improved
+
+1. **Earlier Testing**: Should have started testing earlier
+2. **Documentation**: More real-time documentation during migration
+3. **Automation**: More automation in the migration process
+4. **Cost Monitoring**: Better cost tracking during transition
+
+## Best Practices
+
+Based on our experience, here are key recommendations:
+
+1. **Start Small**: Begin with non-critical services
+2. **Monitor Everything**: Comprehensive monitoring is essential
+3. **Test Thoroughly**: Test all failure scenarios
+4. **Document Extensively**: Document every decision and process
+5. **Have Rollback Plans**: Always have a way to revert
+6. **Optimize Gradually**: Don't optimize too early
+7. **Train Your Team**: Invest in Kubernetes education
+
+## Future Enhancements
+
+Post-migration, we're planning:
+
+- **Service Mesh**: Implement Istio for advanced traffic management
+- **GitOps**: Use ArgoCD for Git-based deployments
+- **Multi-cluster**: Set up multi-region clusters
+- **Cost Optimization**: Further optimize resource allocation
+- **Advanced Monitoring**: Enhanced observability stack
+
+## Conclusion
+
+Migrating from EC2 to EKS was a significant undertaking, but the benefits have been substantial. The improved scalability, better resource utilization, and operational efficiency make it a worthwhile investment.
+
+![Success Metrics](https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop)
+
+The key to success was:
+- **Careful planning**
+- **Incremental execution**
+- **Team collaboration**
+- **Continuous monitoring**
+
+If you're considering a similar migration, I'd be happy to share more details about our specific implementation. Feel free to reach out!
+
+---
+
+*This migration was completed in Q4 2024 and has been running successfully in production since then.*
