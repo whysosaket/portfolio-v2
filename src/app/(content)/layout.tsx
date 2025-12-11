@@ -1,4 +1,4 @@
-export default function WorkArchiveLayout({
+export default function ContentLayout({
   children,
 }: {
   children: React.ReactNode;

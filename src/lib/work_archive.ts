@@ -1,7 +1,4 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
-import { markdownToHTML } from "@/data/blog";
+import { getContentEntry, getAllContentEntries, sortEntriesByDate } from "@/lib/content";
 import { WorkArchiveEntryMetadata } from "@/data/work_archive";
 
 export interface WorkArchiveEntry {
@@ -10,44 +7,12 @@ export interface WorkArchiveEntry {
   source?: string;
 }
 
-function getMDXFiles(dir: string) {
-  if (!fs.existsSync(dir)) {
-    return [];
-  }
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-}
-
 export async function getWorkArchiveEntry(slug: string) {
-  const filePath = path.join(process.cwd(), "content", "work-archive", `${slug}.mdx`);
-  if (!fs.existsSync(filePath)) {
-    return null;
-  }
-  const source = fs.readFileSync(filePath, "utf-8");
-  const { content: rawContent, data: metadata } = matter(source);
-  const content = await markdownToHTML(rawContent);
-  return {
-    source: content,
-    metadata: metadata as WorkArchiveEntryMetadata,
-    slug,
-  };
+  return getContentEntry<WorkArchiveEntryMetadata>(slug, "work-archive");
 }
 
 export async function getAllWorkArchiveEntries(): Promise<WorkArchiveEntry[]> {
-  const workArchiveDir = path.join(process.cwd(), "content", "work-archive");
-  const mdxFiles = getMDXFiles(workArchiveDir);
-
-  return Promise.all(
-    mdxFiles.map(async (file) => {
-      const slug = path.basename(file, path.extname(file));
-      const filePath = path.join(workArchiveDir, file);
-      const source = fs.readFileSync(filePath, "utf-8");
-      const { data: metadata } = matter(source);
-      return {
-        slug,
-        metadata: metadata as WorkArchiveEntryMetadata,
-      };
-    })
-  );
+  return getAllContentEntries<WorkArchiveEntryMetadata>("work-archive");
 }
 
 export function getEntriesByCompany(
@@ -82,9 +47,5 @@ export function groupEntriesByLabel(
 export function sortEntriesChronologically(
   entries: WorkArchiveEntry[]
 ): WorkArchiveEntry[] {
-  return [...entries].sort((a, b) => {
-    const dateA = new Date(a.metadata.date).getTime();
-    const dateB = new Date(b.metadata.date).getTime();
-    return dateB - dateA; // Most recent first
-  });
+  return sortEntriesByDate(entries, "date");
 }

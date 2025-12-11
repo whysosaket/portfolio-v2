@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getBlogPosts } from "@/data/blog";
+import { sortEntriesByDate } from "@/lib/content";
 
 export async function GET(request: Request) {
   try {
@@ -8,11 +9,7 @@ export async function GET(request: Request) {
     const limit = limitParam ? Math.max(1, parseInt(limitParam)) : undefined;
 
     const posts = await getBlogPosts();
-    const sorted = posts.sort((a, b) => {
-      const ad = new Date(a.metadata.publishedAt).getTime();
-      const bd = new Date(b.metadata.publishedAt).getTime();
-      return bd - ad;
-    });
+    const sorted = sortEntriesByDate(posts, "publishedAt");
 
     const sliced = typeof limit === "number" ? sorted.slice(0, limit) : sorted;
     const minimal = sliced.map((p) => ({
