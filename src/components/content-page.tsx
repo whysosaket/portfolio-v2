@@ -32,7 +32,7 @@ export function ContentPage({
       {/* Scrollable Content */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden hide-scrollbar relative">
         {/* Fade gradient at bottom */}
-        <div className="sticky bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+        {/* <div className="sticky bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-[100]" /> */}
         
         <div className="relative">
           {children}
