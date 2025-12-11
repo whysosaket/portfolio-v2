@@ -23,6 +23,8 @@ interface ContentSidebarProps {
   basePath: string;
   dateField?: "date" | "publishedAt";
   renderMetadata?: (entry: ContentEntry) => React.ReactNode;
+  crossCompanyFavorites?: ContentEntry[];
+  currentCompany?: string;
 }
 
 export function ContentSidebar({
@@ -31,12 +33,19 @@ export function ContentSidebar({
   basePath,
   dateField = "date",
   renderMetadata,
+  crossCompanyFavorites = [],
+  currentCompany,
 }: ContentSidebarProps) {
   const router = useRouter();
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
 
-  const handleEntryClick = (slug: string) => {
-    router.push(`${basePath}?slug=${slug}`);
+  const handleEntryClick = (slug: string, company?: string) => {
+    if (company && currentCompany && company !== currentCompany) {
+      // Navigate to the company's work archive page
+      router.push(`${basePath}?company=${company}&slug=${slug}`);
+    } else {
+      router.push(`${basePath}?slug=${slug}`);
+    }
   };
 
   const getDate = (entry: ContentEntry) => entry[dateField] || entry.date || entry.publishedAt || "";
@@ -64,10 +73,19 @@ export function ContentSidebar({
     setOpenGroups(newOpen);
   };
 
-  if (entries.length === 0) {
+  if (entries.length === 0 && crossCompanyFavorites.length === 0) {
     return (
-      <div className="w-full md:w-64 flex-shrink-0">
-        <div className="text-sm text-muted-foreground text-center py-8">
+      <div className="w-full md:w-64 flex-shrink-0 h-full overflow-y-auto overflow-x-hidden">
+        <div className="mb-4 py-4 px-3 border-b">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-1 py-2 rounded-md hover:bg-muted"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back to Home</span>
+          </Link>
+        </div>
+        <div className="text-sm text-muted-foreground text-center py-8 px-4">
           No entries available
         </div>
       </div>
@@ -89,22 +107,40 @@ export function ContentSidebar({
 
       <div className="space-y-6 px-4">
         {/* Favorites Section */}
-        {favorites.length > 0 && (
+        {(favorites.length > 0 || crossCompanyFavorites.length > 0) && (
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
               <Star className="h-4 w-4" />
               <span>Favorites</span>
             </div>
             <ul className="space-y-1">
+              {/* Current company favorites */}
               {favorites.map((entry) => (
                 <li key={entry.slug}>
                   <button
-                    onClick={() => handleEntryClick(entry.slug)}
+                    onClick={() => handleEntryClick(entry.slug, entry.company)}
                     className={cn(
                       "w-full text-left px-3 py-2 rounded-md text-sm transition-colors truncate",
                       currentSlug === entry.slug
                         ? "bg-foreground text-background font-medium"
                         : "hover:bg-muted text-muted-foreground hover:text-foreground"
+                    )}
+                    title={entry.title}
+                  >
+                    {entry.title}
+                  </button>
+                </li>
+              ))}
+              {/* Cross-company favorites with yellow styling */}
+              {crossCompanyFavorites.map((entry) => (
+                <li key={entry.slug}>
+                  <button
+                    onClick={() => handleEntryClick(entry.slug, entry.company)}
+                    className={cn(
+                      "w-full text-left px-3 py-2 rounded-md text-sm transition-colors truncate",
+                      currentSlug === entry.slug
+                        ? "bg-foreground text-background font-medium"
+                        : "text-yellow-600 dark:text-yellow-400 hover:bg-muted hover:text-yellow-700 dark:hover:text-yellow-300"
                     )}
                     title={entry.title}
                   >
@@ -121,8 +157,10 @@ export function ContentSidebar({
           {Array.from(groups.entries())
             .sort(([a], [b]) => {
               // Sort groups by date (most recent first)
-              const dateA = getDate(groups.get(a)?.[0] || {}) || a;
-              const dateB = getDate(groups.get(b)?.[0] || {}) || b;
+              const entryA = groups.get(a)?.[0];
+              const entryB = groups.get(b)?.[0];
+              const dateA = entryA ? getDate(entryA) : a;
+              const dateB = entryB ? getDate(entryB) : b;
               return new Date(dateB).getTime() - new Date(dateA).getTime();
             })
             .map(([label, groupEntries]) => {
@@ -154,7 +192,7 @@ export function ContentSidebar({
                           .map((entry) => (
                             <li key={entry.slug}>
                               <button
-                                onClick={() => handleEntryClick(entry.slug)}
+                                onClick={() => handleEntryClick(entry.slug, entry.company)}
                                 className={cn(
                                   "w-full text-left px-3 py-2 rounded-md text-sm transition-colors truncate",
                                   currentSlug === entry.slug

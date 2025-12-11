@@ -3,6 +3,7 @@ import { DATA } from "@/data/resume";
 import { formatDate } from "@/lib/utils";
 import { ContentSidebar, type ContentEntry } from "@/components/content-sidebar";
 import { ContentPage } from "@/components/content-page";
+import { sortEntriesByDate } from "@/lib/content";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -59,9 +60,15 @@ export default async function WorkArchiveEntry({
     notFound();
   }
 
-  // Get all entries for sidebar
+  // Get all entries and filter sidebar by the entry's company
   const allEntries = await getAllWorkArchiveEntries();
-  const entriesForSidebar: ContentEntry[] = allEntries.map((e) => ({
+  const entryCompany = entry.metadata.company;
+  
+  // Filter to only show entries from the same company
+  const companyEntries = allEntries.filter((e) => e.metadata.company === entryCompany);
+  const sortedCompanyEntries = sortEntriesByDate(companyEntries, "date");
+  
+  const entriesForSidebar: ContentEntry[] = sortedCompanyEntries.map((e) => ({
     slug: e.slug,
     title: e.metadata.title,
     company: e.metadata.company,
@@ -69,6 +76,19 @@ export default async function WorkArchiveEntry({
     favorite: e.metadata.favorite,
     groupLabel: e.metadata.groupLabel,
   }));
+  
+  // Get favorites from other companies to show in sidebar
+  const allFavorites = allEntries.filter((e) => e.metadata.favorite === true);
+  const crossCompanyFavorites: ContentEntry[] = allFavorites
+    .filter((e) => e.metadata.company !== entryCompany)
+    .map((e) => ({
+      slug: e.slug,
+      title: e.metadata.title,
+      company: e.metadata.company,
+      date: e.metadata.date,
+      favorite: e.metadata.favorite,
+      groupLabel: e.metadata.groupLabel,
+    }));
 
   return (
     <ContentPage
@@ -78,6 +98,8 @@ export default async function WorkArchiveEntry({
           currentSlug={entry.slug}
           basePath="/work-archive"
           dateField="date"
+          crossCompanyFavorites={crossCompanyFavorites}
+          currentCompany={entryCompany}
         />
       }
     >
